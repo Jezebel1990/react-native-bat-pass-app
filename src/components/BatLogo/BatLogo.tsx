@@ -14,7 +14,7 @@ export function BatLogo() {
       source={batLogo}
       style={{
         resizeMode: 'contain',
-        height:180
+        height:200,
       }} 
      />
     </>
