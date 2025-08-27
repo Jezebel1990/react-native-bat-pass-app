@@ -1,11 +1,13 @@
 import React from 'react';
-import { Button, View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 
 import { styles } from './BatButtonStyles';
+import { BatTextInput } from '../BatTextInput/BatTextInput';
 
 export function BatButton() {
   return (
-    <View>
+  <>
+    <BatTextInput/>
    <Pressable
      onPress={()=>{console.log("fui pressionado")}}
      style={styles.button}
@@ -20,6 +22,6 @@ export function BatButton() {
      <Text style={styles.text}>⚡ COPY</Text>
     </Pressable>
   
-    </View>
+    </>
   );
 }
