@@ -4,13 +4,23 @@ import { Text, Pressable } from 'react-native';
 import { styles } from './BatButtonStyles';
 import { BatTextInput } from '../BatTextInput/BatTextInput';
 import generatePass from '../../services/passwordService';
+import * as Clipboard from 'expo-clipboard';
 
 export function BatButton() {
     const [pass, setPass] = useState('')
+     const [copied, setCopied] = useState(false);
 
   function handleGenerateButton() {
-    let generateToken = generatePass()
-    setPass(generateToken)
+    let generateToken = generatePass();
+    setPass(generateToken);
+    setCopied(false); 
+  }
+
+   async function handleCopyButton(){
+    if (!pass) return; 
+    await Clipboard.setStringAsync(pass);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   }
 
   return (
@@ -24,10 +34,15 @@ export function BatButton() {
     </Pressable>
 
     <Pressable
-     onPress={()=>{console.log("fui pressionado")}}
+     onPress={handleCopyButton}
      style={styles.button}
     >
-     <Text style={styles.text}>⚡ COPY</Text>
+     <Text  style={[
+            styles.text,
+            copied ? { color: '#fffd00' } : { color: '#66b3df' } 
+          ]}>
+          {copied ? 'Copied' : '⚡ COPY'}
+        </Text>
     </Pressable>
   
     </>
