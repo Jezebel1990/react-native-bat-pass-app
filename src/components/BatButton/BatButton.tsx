@@ -6,12 +6,17 @@ import { BatTextInput } from '../BatTextInput/BatTextInput';
 import generatePass from '../../services/passwordService';
 import * as Clipboard from 'expo-clipboard';
 
-export function BatButton() {
+interface BatButtonProps {
+  passwordLength: number;
+}
+
+export function BatButton({ passwordLength }: BatButtonProps) {
     const [pass, setPass] = useState('')
-     const [copied, setCopied] = useState(false);
+    const [copied, setCopied] = useState(false);
 
   function handleGenerateButton() {
-    let generateToken = generatePass();
+    const length = passwordLength && passwordLength > 0 ? passwordLength : 8;
+    const generateToken = generatePass(length);
     setPass(generateToken);
     setCopied(false); 
   }
